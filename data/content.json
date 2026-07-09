@@ -1,0 +1,124 @@
+{
+  "hero": {
+    "name": "Sourabh Agarwal",
+    "title": "Technical Leader & Software Engineer",
+    "taglines": [
+      "Technical Leader.",
+      "Distributed Systems Architect.",
+      "AI Infrastructure Engineer.",
+      "8+ years shipping production-scale systems."
+    ]
+  },
+  "summary": {
+    "text": "Technical leader and software engineer with 8+ years architecting and delivering distributed backend systems, real-time data platforms, and client-server applications across government and enterprise environments. Background includes distributed Java/Spring microservices for a legacy-to-modern banking platform migration serving 5M+ users. Leads cross-functional engineering teams, with a track record of driving automation and AI-agent tooling (LangChain, CrewAI, RAG) to increase engineering efficiency. Patent holder in predictive analytics, with an M.Sc. in Digital Transformation and Innovation and a B.Tech in Software Engineering.",
+    "stats": [
+      { "value": 12, "suffix": "×", "label": "inference latency reduction (3,600ms \u2192 300ms)" },
+      { "value": 100, "suffix": "K+", "label": "requests served per day" },
+      { "value": 1, "suffix": "M+", "label": "records ingested daily" },
+      { "value": 5, "suffix": "M+", "label": "users served on migrated banking platform" }
+    ]
+  },
+  "experience": [
+    {
+      "company": "National Research Council of Canada",
+      "role": "Application Development Specialist",
+      "location": "Ottawa, ON",
+      "start": "Sept 2022",
+      "end": "Present",
+      "bullets": [
+        "Architected and implemented a high-performance distributed backend service for production AI inference by compressing a 15GB model to 5GB and deploying it through containerized REST APIs, reducing latency 12\u00d7 (3,600ms \u2192 300ms) while supporting 100,000+ requests/day.",
+        "Architected and led end-to-end delivery of an LLM-based summarization service for a 20-person team, cutting response time on 1,000\u20132,000 daily citizen comments from 1 day to 4 hours (75% reduction), with built-in auto-redaction for AI safety compliance.",
+        "Designed and standardized scalable distributed data-processing architecture using Databricks, Apache Spark, Airflow, and MLflow, establishing production engineering patterns adopted across multiple engineering teams.",
+        "Designed and shipped two executive-facing R Shiny/Plotly dashboards independently, replacing a multi-day cross-team manual process and analyzing survey data across 100,000+ respondents \u2014 both adopted at the executive level."
+      ]
+    },
+    {
+      "company": "Statistics Canada",
+      "role": "Data Scientist",
+      "location": "Ottawa, ON",
+      "start": "Aug 2020",
+      "end": "Sept 2022",
+      "bullets": [
+        "Architected and delivered a real-time distributed monitoring platform supporting national electricity monitoring (7,200+ rows/day/province, 1M+ historical rows), adopted by major energy providers and the public.",
+        "Designed and implemented a distributed data ingestion platform integrating 12+ data sources, reducing refresh latency from 24 hours to 5 minutes while processing over 1 million production records daily.",
+        "Led a team of 5 engineers and served as primary client contact coordinating 2 additional teams \u2014 owning requirements gathering, KPI definition, and on-time delivery end-to-end.",
+        "Diagnosed root-cause issues and redesigned the search architecture (algorithm + NLP pipeline), lifting accuracy from 35% to 65%, cutting complaints 20%, and growing traffic 10%."
+      ]
+    },
+    {
+      "company": "University of Ottawa",
+      "role": "Full-Stack Developer (Co-op)",
+      "location": "Ottawa, ON",
+      "start": "Apr 2020",
+      "end": "Aug 2020",
+      "bullets": [
+        "Redesigned the university library's client-server booking system (PHP/MySQL) to support 50\u201360 daily users and up to 30 requests per 3-hour window, adapting the system under tight deadlines for pandemic-driven demand.",
+        "Delivered booking and resource-access features end-to-end within an Agile team, from requirements through deployment."
+      ]
+    },
+    {
+      "company": "Cognizant",
+      "role": "Programmer Analyst",
+      "location": "Bengaluru, India",
+      "start": "Nov 2017",
+      "end": "May 2019",
+      "bullets": [
+        "Built and maintained distributed Java Spring microservices supporting a legacy-to-modern client-server migration for a banking platform serving 5M+ users.",
+        "Developed Angular front-end interfaces and integrated CI/CD into the team's workflow, partnering with the Scrum Master to deliver user stories on sprint timelines."
+      ]
+    }
+  ],
+  "skills": {
+    "Languages": ["C", "C++", "Java (J2EE/J2SE)", "Python", "R"],
+    "Distributed Systems & Backend": ["REST APIs", "Spring Boot", "Flask", "Microservices", "Client-Server Architecture"],
+    "Data Engineering": ["Apache Spark", "Airflow", "Databricks", "SQL", "MongoDB", "Oracle", "MySQL", "Firebase"],
+    "Cloud & DevOps": ["Azure", "AWS EC2", "AWS S3", "Docker", "Kubernetes", "CI/CD", "Git", "Linux"],
+    "AI / ML & Automation": ["LLMs", "LangChain", "Hugging Face", "TensorFlow", "Scikit-learn", "spaCy", "NLP", "MLflow", "RAG", "AI Agents (CrewAI)", "Transformers"],
+    "Visualization & BI": ["R Shiny", "Plotly", "Tableau", "Power BI", "Matplotlib", "Seaborn"],
+    "Web Development": ["React", "Angular", "HTML/CSS", "Tailwind", "Material UI", "PHP"]
+  },
+  "projects": [
+    {
+      "title": "Add your first project",
+      "description": "This is a placeholder card. Open data/content.json and replace the entries in the \"projects\" array with your own work \u2014 title, description, link, and tags.",
+      "link": "",
+      "tags": ["placeholder"],
+      "placeholder": true
+    },
+    {
+      "title": "Add another project",
+      "description": "Duplicate this object in content.json for each project you want to showcase. Delete the \"placeholder\" field (or set it to false) once it's real.",
+      "link": "",
+      "tags": ["placeholder"],
+      "placeholder": true
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.Sc., Digital Transformation and Innovation",
+      "school": "University of Ottawa, Ottawa, ON",
+      "years": "2019 \u2013 2021"
+    },
+    {
+      "degree": "B.Tech, Software Engineering",
+      "school": "SRM University, Chennai, India",
+      "years": "2013 \u2013 2017"
+    }
+  ],
+  "patents": [
+    {
+      "title": "A Computer Implemented System for Predicting Customer Satisfaction and a Method Thereof",
+      "detail": "Patent Application No. 2017841046148, SRM University."
+    },
+    {
+      "title": "Customer Satisfaction for Restaurants Based on Parameters for Business Development and Revenue",
+      "detail": "Conference Paper, NCRISECT 2017."
+    }
+  ],
+  "contact": {
+    "email": "Sourabh.max01@gmail.com",
+    "phone": "(613) 255-2684",
+    "linkedin": "linkedin.com/in/sourabh-agarwal-261b57111",
+    "linkedinUrl": "https://linkedin.com/in/sourabh-agarwal-261b57111"
+  }
+}
