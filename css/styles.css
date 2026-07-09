@@ -566,10 +566,10 @@ button:focus-visible {
    ERROR STATE
    ============================================================ */
 .load-error {
+  display: none;
   position: fixed;
   inset: 0;
   z-index: 20;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -577,6 +577,9 @@ button:focus-visible {
   background: var(--bg);
   padding: var(--space-4);
   text-align: center;
+}
+.load-error:not([hidden]) {
+  display: flex;
 }
 .load-error__detail {
   color: var(--text-muted);
