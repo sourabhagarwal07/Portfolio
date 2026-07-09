@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sourabh Agarwal — Technical Leader &amp; Software Engineer</title>
+  <meta name="description" content="Portfolio of Sourabh Agarwal — technical leader and software engineer specializing in distributed systems, real-time data platforms, and AI infrastructure." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <nav class="nav" id="nav">
+    <span class="nav__mark">SA</span>
+    <div class="nav__status">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span class="nav__status-text">Available for opportunities</span>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+    <section id="hero" class="hero" aria-label="Introduction">
+      <div class="hero__inner">
+        <p class="eyebrow">// PORTFOLIO.INIT</p>
+        <h1 class="hero__typing" id="hero-typing" aria-live="polite"><span id="hero-typing-text"></span><span class="cursor" aria-hidden="true"></span></h1>
+        <div class="hero__identity" id="hero-identity">
+          <p class="hero__name" id="hero-name"></p>
+          <p class="hero__title" id="hero-title"></p>
+        </div>
+        <a href="#summary" class="hero__scroll-cue" aria-label="Scroll to summary">
+          <span></span>
+        </a>
+      </div>
+      <div class="hero__bg" aria-hidden="true" id="hero-bg"></div>
+    </section>
+
+    <section id="summary" class="summary" aria-label="Summary">
+      <p class="eyebrow">// SUMMARY</p>
+      <p class="summary__text" id="summary-text"></p>
+      <div class="stats" id="stats-grid"></div>
+    </section>
+
+    <section id="experience" class="experience" aria-label="Experience">
+      <p class="eyebrow">// EXPERIENCE</p>
+      <h2 class="section-heading">Where I've built things</h2>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section id="skills" class="skills" aria-label="Skills">
+      <p class="eyebrow">// SKILLS</p>
+      <h2 class="section-heading">Toolset</h2>
+      <div class="skills__grid" id="skills-grid"></div>
+    </section>
+
+    <section id="projects" class="projects" aria-label="Projects">
+      <p class="eyebrow">// PROJECTS</p>
+      <h2 class="section-heading">Selected work</h2>
+      <div class="projects__grid" id="projects-grid"></div>
+    </section>
+
+    <section id="education" class="education" aria-label="Education and patents">
+      <div class="education__col">
+        <p class="eyebrow">// EDUCATION</p>
+        <div id="education-list"></div>
+      </div>
+      <div class="education__col">
+        <p class="eyebrow">// PATENTS &amp; PUBLICATIONS</p>
+        <div id="patents-list"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact" aria-label="Contact">
+      <p class="eyebrow">// CONTACT</p>
+      <h2 class="section-heading">Let's talk</h2>
+      <div class="contact__links" id="contact-links"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p id="footer-text"></p>
+  </footer>
+
+  <div id="load-error" class="load-error" role="alert" hidden>
+    <p>Content failed to load. Please refresh the page.</p>
+    <p class="load-error__detail">If you're running this locally by double-clicking index.html, browsers block local file fetches — serve it instead with <code>python3 -m http.server</code> and open <code>http://localhost:8000</code>.</p>
+  </div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
