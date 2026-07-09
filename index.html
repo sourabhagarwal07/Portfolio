@@ -89,8 +89,9 @@
   </footer>
 
   <div id="load-error" class="load-error" role="alert" hidden>
-    <p>Content failed to load. Please refresh the page.</p>
-    <p class="load-error__detail">If you're running this locally by double-clicking index.html, browsers block local file fetches — serve it instead with <code>python3 -m http.server</code> and open <code>http://localhost:8000</code>.</p>
+    <p>Content failed to load.</p>
+    <p class="load-error__detail">If you're running this locally by double-clicking index.html, browsers block local file fetches — serve it instead with <code>python3 -m http.server</code> and open <code>http://localhost:8000</code>. Otherwise this may be a temporary network hiccup.</p>
+    <button type="button" id="retry-load" class="retry-button">Retry</button>
   </div>
 
   <script src="js/script.js" defer></script>

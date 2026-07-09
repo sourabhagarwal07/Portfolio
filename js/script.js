@@ -341,19 +341,56 @@
     document.getElementById("load-error").hidden = false;
   }
 
-  async function init() {
+  function hideLoadError() {
+    document.getElementById("main-content").hidden = false;
+    document.getElementById("load-error").hidden = true;
+  }
+
+  function resetRenderedSections() {
+    // Clear any partial render so a retry doesn't duplicate content.
+    [
+      "stats-grid",
+      "timeline",
+      "skills-grid",
+      "projects-grid",
+      "education-list",
+      "patents-list",
+      "contact-links",
+    ].forEach((id) => {
+      const node = document.getElementById(id);
+      if (node) node.innerHTML = "";
+    });
+  }
+
+  const MAX_AUTO_RETRIES = 2;
+  const RETRY_DELAY_MS = 1200;
+
+  async function fetchContent() {
+    const response = await fetch("data/content.json", { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function loadAndRender(attempt = 0) {
     let content;
     try {
-      const response = await fetch("data/content.json");
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      content = await response.json();
+      content = await fetchContent();
     } catch (err) {
-      console.error("Failed to load content.json:", err);
+      console.error(`Failed to load content.json (attempt ${attempt + 1}):`, err);
+      if (attempt < MAX_AUTO_RETRIES) {
+        await sleep(RETRY_DELAY_MS * (attempt + 1));
+        return loadAndRender(attempt + 1);
+      }
       showLoadError();
       return;
     }
 
     try {
+      resetRenderedSections();
       renderHero(content.hero);
       renderSummary(content.summary);
       renderExperience(content.experience);
@@ -366,9 +403,19 @@
       setupRevealObserver();
       setupStatCounters();
       setupParallax();
+      hideLoadError();
     } catch (err) {
       console.error("Failed to render content:", err);
       showLoadError();
+    }
+  }
+
+  function init() {
+    loadAndRender();
+
+    const retryButton = document.getElementById("retry-load");
+    if (retryButton) {
+      retryButton.addEventListener("click", () => loadAndRender());
     }
   }
 

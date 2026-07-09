@@ -589,6 +589,23 @@ button:focus-visible {
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
 }
+.retry-button {
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+  cursor: pointer;
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.retry-button:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
 
 /* ============================================================
    REDUCED MOTION
