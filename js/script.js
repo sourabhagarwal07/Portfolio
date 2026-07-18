@@ -56,26 +56,30 @@
 
   function renderExperience(experience) {
     const timeline = document.getElementById("timeline");
-    experience.forEach((job) => {
-      const entry = el("div", "timeline-entry reveal");
+    experience.forEach((job, index) => {
+      const entry = el("article", "timeline-entry reveal" + (index === 0 ? " is-expanded" : ""));
+      const toggle = el("button", "timeline-entry__toggle");
+      toggle.type = "button";
+      toggle.setAttribute("aria-expanded", index === 0 ? "true" : "false");
 
-      const meta = el(
-        "div",
-        "timeline-entry__meta",
-        formatRange(job.start, job.end)
-      );
+      const date = el("div", "timeline-entry__date", formatRange(job.start, job.end));
+      const heading = el("div", "timeline-entry__heading");
+      const role = el("div", "timeline-entry__role", job.role);
+      const company = el("div", "timeline-entry__company", job.company);
+      const location = el("div", "timeline-entry__location", job.location);
+      const indicator = el("span", "timeline-entry__indicator", "+");
+      heading.append(role, company, location);
+      toggle.append(date, heading, indicator);
 
-      const role = el("div", "timeline-entry__role");
-      role.textContent = job.role + " \u00b7 ";
-      const company = el("span", "timeline-entry__company", job.company);
-      role.appendChild(company);
-
+      const details = el("div", "timeline-entry__details");
       const bullets = el("ul", "timeline-entry__bullets");
-      job.bullets.forEach((bullet) => {
-        bullets.appendChild(el("li", "", bullet));
+      job.bullets.forEach((bullet) => bullets.appendChild(el("li", "", bullet)));
+      details.appendChild(bullets);
+      entry.append(toggle, details);
+      toggle.addEventListener("click", () => {
+        const expanded = entry.classList.toggle("is-expanded");
+        toggle.setAttribute("aria-expanded", String(expanded));
       });
-
-      entry.append(meta, role, bullets);
       timeline.appendChild(entry);
     });
   }
@@ -90,17 +94,15 @@
       }))
     );
     const dashboard = el("div", "skills-dashboard");
-    const filters = el("div", "skills-filters");
-    const catalog = el("div", "skills-plot");
+    const treemap = el("div", "skills-treemap");
     const detail = el("aside", "skill-detail reveal");
     detail.setAttribute("aria-live", "polite");
     let activeTool;
-    let activeCategory = "All";
 
-    function selectTool(tool, card) {
-      if (activeTool && activeTool.card) activeTool.card.classList.remove("is-selected");
-      activeTool = { ...tool, card };
-      card.classList.add("is-selected");
+    function selectTool(tool, tile) {
+      if (activeTool && activeTool.tile) activeTool.tile.classList.remove("is-selected");
+      activeTool = { ...tool, tile };
+      tile.classList.add("is-selected");
       detail.innerHTML = "";
       const eyebrow = el("p", "skill-detail__eyebrow", tool.category);
       const name = el("h3", "skill-detail__name", tool.name);
@@ -113,47 +115,29 @@
       detail.append(eyebrow, name, level, meter, description);
     }
 
-    function renderCatalog() {
-      catalog.innerHTML = "";
-      const visible = activeCategory === "All" ? tools : tools.filter((tool) => tool.category === activeCategory);
-      visible.forEach((tool) => {
-        const card = el("button", "skill-plot__row");
-        card.type = "button";
-        card.setAttribute("aria-label", `${tool.name}, ${tool.level}% proficiency`);
-        const heading = el("span", "skill-plot__label", tool.name);
-        const meter = el("span", "skill-plot__track");
-        const fill = el("span", "");
-        fill.style.width = `${tool.level}%`;
-        meter.appendChild(fill);
-        const level = el("span", "skill-plot__level", `${tool.level}%`);
-        card.append(heading, meter, level);
-        card.addEventListener("click", () => selectTool(tool, card));
-        catalog.appendChild(card);
-        if (activeTool && activeTool.name === tool.name) activeTool.card = card;
+    Object.entries(skills).forEach(([category, names], index) => {
+      const group = el("section", "skills-treemap__group");
+      group.style.setProperty("--hue", 208 + index * 19);
+      group.style.setProperty("--group-span", Math.max(3, Math.min(6, Math.ceil(names.length / 2))));
+      const heading = el("h3", "skills-treemap__heading", category);
+      const tiles = el("div", "skills-treemap__tiles");
+      names.forEach((name) => {
+        const tool = tools.find((entry) => entry.name === name);
+        const tile = el("button", "skill-tile", name);
+        tile.type = "button";
+        tile.style.setProperty("--weight", Math.max(3, Math.round(tool.level / 14)));
+        tile.setAttribute("aria-label", `${tool.name}, ${tool.level}% proficiency`);
+        tile.addEventListener("click", () => selectTool(tool, tile));
+        tiles.appendChild(tile);
+        if (tool.name === "Python") activeTool = { ...tool, tile };
       });
-      const selected = visible.find((tool) => activeTool && tool.name === activeTool.name) || visible[0];
-      if (selected) {
-        const selectedCard = [...catalog.children].find((card) => card.querySelector(".skill-plot__label").textContent === selected.name);
-        selectTool(selected, selectedCard);
-      }
-    }
-
-    ["All", ...Object.keys(skills)].forEach((category) => {
-      const filter = el("button", "skills-filter", category);
-      filter.type = "button";
-      filter.addEventListener("click", () => {
-        activeCategory = category;
-        filters.querySelectorAll(".skills-filter").forEach((button) => button.classList.toggle("is-active", button === filter));
-        renderCatalog();
-      });
-      if (category === activeCategory) filter.classList.add("is-active");
-      filters.appendChild(filter);
+      group.append(heading, tiles);
+      treemap.appendChild(group);
     });
 
-    dashboard.append(filters, catalog);
+    dashboard.append(treemap);
     grid.append(dashboard, detail);
-    activeTool = tools.find((tool) => tool.name === "Python") || tools[0];
-    renderCatalog();
+    selectTool(activeTool || tools[0], activeTool && activeTool.tile);
   }
 
   function renderProjects(projects) {
@@ -445,6 +429,21 @@
     });
   }
 
+  function setupNavigation() {
+    const links = [...document.querySelectorAll(".nav__links a")];
+    const byId = new Map(links.map((link) => [link.getAttribute("href").slice(1), link]));
+    const sections = [...document.querySelectorAll("main section[id]")];
+    if (!("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible || !byId.has(visible.target.id)) return;
+      links.forEach((link) => link.classList.toggle("is-active", link === byId.get(visible.target.id)));
+    }, { rootMargin: "-25% 0px -65%", threshold: [0.01, 0.2, 0.5] });
+    sections.forEach((section) => observer.observe(section));
+  }
+
   /* ----------------------------------------------------------
    * Boot
    * ---------------------------------------------------------- */
@@ -525,6 +524,7 @@
 
   function init() {
     loadAndRender();
+    setupNavigation();
 
     const retryButton = document.getElementById("retry-load");
     if (retryButton) {
