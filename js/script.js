@@ -80,18 +80,80 @@
     });
   }
 
-  function renderSkills(skills) {
+  function renderSkills(skills, proficiency) {
     const grid = document.getElementById("skills-grid");
-    Object.keys(skills).forEach((category) => {
-      const group = el("div", "skill-group reveal");
-      const title = el("div", "skill-group__title", category);
-      const tags = el("div", "skill-group__tags");
-      skills[category].forEach((skill) => {
-        tags.appendChild(el("span", "skill-tag", skill));
+    const tools = Object.entries(skills).flatMap(([category, names]) =>
+      names.map((name) => ({
+        name,
+        category,
+        level: proficiency[name] || 70,
+      }))
+    );
+    const dashboard = el("div", "skills-dashboard");
+    const filters = el("div", "skills-filters");
+    const catalog = el("div", "skills-plot");
+    const detail = el("aside", "skill-detail reveal");
+    detail.setAttribute("aria-live", "polite");
+    let activeTool;
+    let activeCategory = "All";
+
+    function selectTool(tool, card) {
+      if (activeTool && activeTool.card) activeTool.card.classList.remove("is-selected");
+      activeTool = { ...tool, card };
+      card.classList.add("is-selected");
+      detail.innerHTML = "";
+      const eyebrow = el("p", "skill-detail__eyebrow", tool.category);
+      const name = el("h3", "skill-detail__name", tool.name);
+      const level = el("p", "skill-detail__level", `${tool.level}% proficiency`);
+      const meter = el("div", "skill-detail__meter");
+      const fill = el("span", "");
+      fill.style.width = `${tool.level}%`;
+      meter.appendChild(fill);
+      const description = el("p", "skill-detail__copy", tool.level >= 85 ? "Advanced, production-focused experience." : tool.level >= 70 ? "Strong working proficiency." : "Working knowledge and active practice.");
+      detail.append(eyebrow, name, level, meter, description);
+    }
+
+    function renderCatalog() {
+      catalog.innerHTML = "";
+      const visible = activeCategory === "All" ? tools : tools.filter((tool) => tool.category === activeCategory);
+      visible.forEach((tool) => {
+        const card = el("button", "skill-plot__row");
+        card.type = "button";
+        card.setAttribute("aria-label", `${tool.name}, ${tool.level}% proficiency`);
+        const heading = el("span", "skill-plot__label", tool.name);
+        const meter = el("span", "skill-plot__track");
+        const fill = el("span", "");
+        fill.style.width = `${tool.level}%`;
+        meter.appendChild(fill);
+        const level = el("span", "skill-plot__level", `${tool.level}%`);
+        card.append(heading, meter, level);
+        card.addEventListener("click", () => selectTool(tool, card));
+        catalog.appendChild(card);
+        if (activeTool && activeTool.name === tool.name) activeTool.card = card;
       });
-      group.append(title, tags);
-      grid.appendChild(group);
+      const selected = visible.find((tool) => activeTool && tool.name === activeTool.name) || visible[0];
+      if (selected) {
+        const selectedCard = [...catalog.children].find((card) => card.querySelector(".skill-plot__label").textContent === selected.name);
+        selectTool(selected, selectedCard);
+      }
+    }
+
+    ["All", ...Object.keys(skills)].forEach((category) => {
+      const filter = el("button", "skills-filter", category);
+      filter.type = "button";
+      filter.addEventListener("click", () => {
+        activeCategory = category;
+        filters.querySelectorAll(".skills-filter").forEach((button) => button.classList.toggle("is-active", button === filter));
+        renderCatalog();
+      });
+      if (category === activeCategory) filter.classList.add("is-active");
+      filters.appendChild(filter);
     });
+
+    dashboard.append(filters, catalog);
+    grid.append(dashboard, detail);
+    activeTool = tools.find((tool) => tool.name === "Python") || tools[0];
+    renderCatalog();
   }
 
   function renderProjects(projects) {
@@ -112,8 +174,18 @@
         card.appendChild(tagWrap);
       }
 
+      if (project.updatedAt) {
+        const meta = el("div", "project-card__meta");
+        const date = new Date(project.updatedAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+        });
+        meta.textContent = `Last updated ${date}`;
+        card.appendChild(meta);
+      }
+
       if (project.link) {
-        const link = el("a", "project-card__link", "View project \u2192");
+        const link = el("a", "project-card__link", "View repository");
         link.href = project.link;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
@@ -146,19 +218,36 @@
   function renderContact(contact) {
     const wrap = document.getElementById("contact-links");
 
-    const email = el("a", "contact-link", contact.email);
+    const intro = el("p", "contact__intro", "Have a role, project, or idea in mind? I’d be glad to connect.");
+    const email = el("a", "contact__primary-link", "Start a conversation");
     email.href = `mailto:${contact.email}`;
-    wrap.appendChild(email);
+    email.setAttribute("aria-label", `Email ${contact.email}`);
 
-    const phone = el("a", "contact-link", contact.phone);
-    phone.href = `tel:${contact.phone.replace(/[^\d+]/g, "")}`;
-    wrap.appendChild(phone);
+    const details = el("div", "contact__details");
 
-    const linkedin = el("a", "contact-link", "LinkedIn");
-    linkedin.href = contact.linkedinUrl || `https://${contact.linkedin}`;
-    linkedin.target = "_blank";
-    linkedin.rel = "noopener noreferrer";
-    wrap.appendChild(linkedin);
+    function addContactDetail(label, value, href, external) {
+      const link = el("a", "contact-detail", "");
+      link.href = href;
+      if (external) {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+      }
+      const labelEl = el("span", "contact-detail__label", label);
+      const valueEl = el("span", "contact-detail__value", value);
+      link.append(labelEl, valueEl);
+      details.appendChild(link);
+    }
+
+    addContactDetail("Email", contact.email, `mailto:${contact.email}`);
+    addContactDetail("Phone", contact.phone, `tel:${contact.phone.replace(/[^\d+]/g, "")}`);
+    addContactDetail(
+      "LinkedIn",
+      contact.linkedin,
+      contact.linkedinUrl || `https://${contact.linkedin}`,
+      true
+    );
+
+    wrap.append(intro, email, details);
   }
 
   function renderFooter(name) {
@@ -333,6 +422,29 @@
     );
   }
 
+  function setupTiltInteractions() {
+    if (prefersReducedMotion || !window.matchMedia("(pointer: fine)").matches) return;
+
+    document.querySelectorAll(".project-card, .stat, .skill-group").forEach((card) => {
+      card.classList.add("has-tilt");
+      card.addEventListener("pointermove", (event) => {
+        const bounds = card.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+        card.style.setProperty("--tilt-x", `${x * 7}deg`);
+        card.style.setProperty("--tilt-y", `${y * -7}deg`);
+        card.style.setProperty("--glow-x", `${(x + 0.5) * 100}%`);
+        card.style.setProperty("--glow-y", `${(y + 0.5) * 100}%`);
+      });
+      card.addEventListener("pointerleave", () => {
+        card.style.removeProperty("--tilt-x");
+        card.style.removeProperty("--tilt-y");
+        card.style.removeProperty("--glow-x");
+        card.style.removeProperty("--glow-y");
+      });
+    });
+  }
+
   /* ----------------------------------------------------------
    * Boot
    * ---------------------------------------------------------- */
@@ -394,7 +506,7 @@
       renderHero(content.hero);
       renderSummary(content.summary);
       renderExperience(content.experience);
-      renderSkills(content.skills);
+      renderSkills(content.skills, content.skillProficiency || {});
       renderProjects(content.projects);
       renderEducation(content.education, content.patents);
       renderContact(content.contact);
@@ -403,6 +515,7 @@
       setupRevealObserver();
       setupStatCounters();
       setupParallax();
+      setupTiltInteractions();
       hideLoadError();
     } catch (err) {
       console.error("Failed to render content:", err);

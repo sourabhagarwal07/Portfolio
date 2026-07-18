@@ -19,7 +19,8 @@ A few notes on the shape of that file:
 - **`hero.taglines`** — array of short phrases the hero types out on load. Add, remove, or reorder freely; the last one in the list is what stays on screen.
 - **`summary.stats`** — each object needs `value` (a number), `suffix` (e.g. `"×"`, `"M+"`), and `label`. These animate as count-up numbers when scrolled into view.
 - **`experience`** — array of jobs, most recent first. `end: null` isn't required here since we use the literal string `"Present"` for the current role.
-- **`skills`** — an object keyed by category name; each value is an array of skill strings. Add a new category by adding a new key — it'll render as its own card automatically.
+- **`skills`** — an object keyed by category name; each value is an array of skill strings. The interactive toolset globe renders each skill as a selectable node.
+- **`skillProficiency`** — maps each skill name to a numeric proficiency level from `0` to `100`, shown when that tool is selected in the globe. Keep every name identical to its entry in `skills`.
 - **`projects`** — replace the two placeholder entries with your real projects. Each needs `title` and `description`; `link` and `tags` are optional. Remove the `"placeholder": true` field (or set it to `false`) once it's a real project — that field only controls the dashed-border placeholder styling.
 - **`education`** / **`patents`** — straightforward arrays of objects; add or remove entries as needed.
 - **`contact`** — `email`, `phone`, `linkedin` (display text), and `linkedinUrl` (the actual link).

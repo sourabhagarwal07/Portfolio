@@ -77,20 +77,78 @@
     "Visualization & BI": ["R Shiny", "Plotly", "Tableau", "Power BI", "Matplotlib", "Seaborn"],
     "Web Development": ["React", "Angular", "HTML/CSS", "Tailwind", "Material UI", "PHP"]
   },
+  "skillProficiency": {
+    "C": 72, "C++": 74, "Java (J2EE/J2SE)": 88, "Python": 92, "R": 84,
+    "REST APIs": 92, "Spring Boot": 88, "Flask": 82, "Microservices": 90, "Client-Server Architecture": 91,
+    "Apache Spark": 88, "Airflow": 85, "Databricks": 87, "SQL": 90, "MongoDB": 78, "Oracle": 76, "MySQL": 80, "Firebase": 72,
+    "Azure": 84, "AWS EC2": 77, "AWS S3": 78, "Docker": 88, "Kubernetes": 80, "CI/CD": 86, "Git": 92, "Linux": 84,
+    "LLMs": 88, "LangChain": 84, "Hugging Face": 82, "TensorFlow": 78, "Scikit-learn": 84, "spaCy": 80, "NLP": 87, "MLflow": 82, "RAG": 86, "AI Agents (CrewAI)": 81, "Transformers": 83,
+    "R Shiny": 85, "Plotly": 87, "Tableau": 76, "Power BI": 78, "Matplotlib": 84, "Seaborn": 82,
+    "React": 78, "Angular": 81, "HTML/CSS": 88, "Tailwind": 76, "Material UI": 78, "PHP": 73
+  },
   "projects": [
     {
-      "title": "Add your first project",
-      "description": "This is a placeholder card. Open data/content.json and replace the entries in the \"projects\" array with your own work \u2014 title, description, link, and tags.",
-      "link": "",
-      "tags": ["placeholder"],
-      "placeholder": true
+      "title": "Resume",
+      "description": "A modern resume site showcasing full-stack development and software engineering skills.",
+      "link": "https://github.com/sourabhagarwal07/Resume",
+      "tags": ["CSS"],
+      "updatedAt": "2022-10-27T00:57:51Z"
     },
     {
-      "title": "Add another project",
-      "description": "Duplicate this object in content.json for each project you want to showcase. Delete the \"placeholder\" field (or set it to false) once it's real.",
-      "link": "",
-      "tags": ["placeholder"],
-      "placeholder": true
+      "title": "GitHub Profile Configuration",
+      "description": "Configuration files and content for a customized GitHub profile.",
+      "link": "https://github.com/sourabhagarwal07/sourabhagarwal07",
+      "tags": ["Config", "GitHub"],
+      "updatedAt": "2022-05-16T22:29:43Z"
+    },
+    {
+      "title": "GitHub Repository Demo",
+      "description": "A JavaScript-based repository created to explore and demonstrate GitHub workflows.",
+      "link": "https://github.com/sourabhagarwal07/sourabhagarwal_github",
+      "tags": ["JavaScript"],
+      "updatedAt": "2021-04-23T16:51:14Z"
+    },
+    {
+      "title": "Throucery",
+      "description": "A mock e-commerce experience built and hosted with Joomla.",
+      "link": "https://github.com/sourabhagarwal07/Throucery",
+      "tags": ["HTML", "Joomla"],
+      "updatedAt": "2020-09-21T22:22:35Z"
+    },
+    {
+      "title": "Dynamic Web Project",
+      "description": "A dynamic web application built with Java Servlets, JSP, and related web technologies.",
+      "link": "https://github.com/sourabhagarwal07/Web_Project",
+      "tags": ["Java", "Servlets", "JSP"],
+      "updatedAt": "2020-01-22T06:31:51Z"
+    },
+    {
+      "title": "IT Asset Management Tool",
+      "description": "An internship project: a dynamic web application for managing organizational assets assigned to employees.",
+      "link": "https://github.com/sourabhagarwal07/IT_Asset-_management_tool",
+      "tags": ["JavaScript", "Web App"],
+      "updatedAt": "2020-01-22T06:13:04Z"
+    },
+    {
+      "title": "Candev Demo",
+      "description": "A smart police-recruitment concept that applies AI and machine learning to analyze and automate existing processes.",
+      "link": "https://github.com/sourabhagarwal07/Candev_demo",
+      "tags": ["Python", "AI", "Machine Learning"],
+      "updatedAt": "2020-01-19T16:51:14Z"
+    },
+    {
+      "title": "FPS Game Development",
+      "description": "An exploration of the Unity environment through a first-person shooter game prototype.",
+      "link": "https://github.com/sourabhagarwal07/FPS-Game-Development",
+      "tags": ["Unity", "Game Development"],
+      "updatedAt": "2020-01-16T22:22:35Z"
+    },
+    {
+      "title": "Restaurant Customer Prediction",
+      "description": "A major project applying machine learning to help restaurants predict customer churn and improve retention.",
+      "link": "https://github.com/sourabhagarwal07/Customer-Prediction-for-Restaurant-Domain-Major-Project-",
+      "tags": ["Java", "Machine Learning", "Analytics"],
+      "updatedAt": "2020-01-16T22:12:56Z"
     }
   ],
   "education": [
