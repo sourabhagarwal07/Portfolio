@@ -25,6 +25,75 @@
     return node;
   }
 
+  function icon(name) {
+    const paths = {
+      arrow: ["M5 12h14", "m13 6 6 6-6 6"],
+      external: ["M14 5h5v5", "m19 5-8 8", "M17 12v5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h5"],
+      repository: ["M7 3.5a3.5 3.5 0 0 0-1 6.82V13a2 2 0 0 0 2 2h1v-2H8v-1.24a3.5 3.5 0 1 0-2 0V13a2 2 0 0 0 2 2h1v4h6v-4h1a2 2 0 0 0 2-2v-1.18a3.5 3.5 0 1 0-2 0V13h-1v2h1a2 2 0 0 0 2-2v-2.68A3.5 3.5 0 1 0 17 3.5"],
+      mail: ["M4 6h16v12H4z", "m4 7 8 6 8-6"],
+      phone: ["M7 3h3l1.5 4-2 1.5a15 15 0 0 0 6 6L17 12l4 1.5v3c0 1.1-.9 2-2 2C10.2 18.5 5.5 13.8 5.5 5c0-1.1.4-2 1.5-2Z"],
+      linkedin: ["M6 9v9", "M6 6v.01", "M10 18v-5a4 4 0 0 1 8 0v5", "M10 9v9"],
+    };
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.classList.add("icon", `icon--${name}`);
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "1.8");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.setAttribute("aria-hidden", "true");
+    (paths[name] || []).forEach((d) => {
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      path.setAttribute("d", d);
+      svg.appendChild(path);
+    });
+    return svg;
+  }
+
+  function toolIcon(name) {
+    const brands = {
+      "C": "c", "C++": "cplusplus", "Java (J2EE/J2SE)": "openjdk", Python: "python", R: "r",
+      "REST APIs": "fastapi", "Spring Boot": "springboot", Flask: "flask", Microservices: "apache", "Client-Server Architecture": "socketdotio",
+      "Apache Spark": "apachespark", Airflow: "apacheairflow", Databricks: "databricks", SQL: "sqlite", MongoDB: "mongodb", Oracle: "oracle", MySQL: "mysql", Firebase: "firebase",
+      Azure: "microsoftazure", "AWS EC2": "amazonaws", "AWS S3": "amazonaws", Docker: "docker", Kubernetes: "kubernetes", "CI/CD": "githubactions", Git: "git", Linux: "linux",
+      LLMs: "openai", LangChain: "langchain", "Hugging Face": "huggingface", TensorFlow: "tensorflow", "Scikit-learn": "scikitlearn", spaCy: "spacy", NLP: "huggingface", MLflow: "mlflow", RAG: "weaviate", "AI Agents (CrewAI)": "crewai", Transformers: "huggingface",
+      "R Shiny": "r", Plotly: "plotly", Tableau: "tableau", "Power BI": "powerbi", Matplotlib: "matplotlib", Seaborn: "python",
+      React: "react", Angular: "angular", "HTML/CSS": "html5", Tailwind: "tailwindcss", "Material UI": "mui", PHP: "php",
+    };
+    const brand = brands[name];
+    if (brand) {
+      const image = el("img", "tool-icon tool-icon--brand");
+      image.src = `https://cdn.simpleicons.org/${brand}/a5f3fc`;
+      image.alt = "";
+      image.width = 32;
+      image.height = 32;
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.addEventListener("error", () => image.replaceWith(genericToolIcon()));
+      return image;
+    }
+    return genericToolIcon();
+  }
+
+  function genericToolIcon() {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const nodes = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    svg.classList.add("tool-icon");
+    svg.setAttribute("viewBox", "0 0 32 32");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "2");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    path.setAttribute("d", "m16 3 11 6v14l-11 6L5 23V9l11-6Zm0 0v12m11-6-11 6L5 9");
+    nodes.setAttribute("d", "M12 17h.01M20 17h.01M16 23h.01");
+    svg.append(path, nodes);
+    return svg;
+  }
+
   function formatRange(start, end) {
     return `${start} \u2014 ${end}`;
   }
@@ -72,9 +141,17 @@
       toggle.append(date, heading, indicator);
 
       const details = el("div", "timeline-entry__details");
+      const detailsContent = el("div", "timeline-entry__details-content");
       const bullets = el("ul", "timeline-entry__bullets");
       job.bullets.forEach((bullet) => bullets.appendChild(el("li", "", bullet)));
-      details.appendChild(bullets);
+      detailsContent.appendChild(bullets);
+      if (job.impact) {
+        const impact = el("aside", "timeline-entry__impact");
+        const impactLabel = el("span", "timeline-entry__impact-label", "Impact / XYZ");
+        impact.append(impactLabel, el("p", "timeline-entry__impact-copy", job.impact));
+        detailsContent.appendChild(impact);
+      }
+      details.appendChild(detailsContent);
       entry.append(toggle, details);
       toggle.addEventListener("click", () => {
         const expanded = entry.classList.toggle("is-expanded");
@@ -123,10 +200,11 @@
       const tiles = el("div", "skills-treemap__tiles");
       names.forEach((name) => {
         const tool = tools.find((entry) => entry.name === name);
-        const tile = el("button", "skill-tile", name);
+        const tile = el("button", "skill-tile");
         tile.type = "button";
         tile.style.setProperty("--weight", Math.max(3, Math.round(tool.level / 14)));
         tile.setAttribute("aria-label", `${tool.name}, ${tool.level}% proficiency`);
+        tile.append(toolIcon(name), el("span", "skill-tile__label", name));
         tile.addEventListener("click", () => selectTool(tool, tile));
         tiles.appendChild(tile);
         if (tool.name === "Python") activeTool = { ...tool, tile };
@@ -173,6 +251,7 @@
         link.href = project.link;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
+        link.append(icon("repository"), icon("external"));
         card.appendChild(link);
       }
 
@@ -206,32 +285,30 @@
     const email = el("a", "contact__primary-link", "Start a conversation");
     email.href = `mailto:${contact.email}`;
     email.setAttribute("aria-label", `Email ${contact.email}`);
+    email.append(icon("mail"), icon("arrow"));
+
+    const linkedin = el("a", "contact__linkedin-button", "Connect on LinkedIn");
+    linkedin.href = contact.linkedinUrl || `https://${contact.linkedin}`;
+    linkedin.target = "_blank";
+    linkedin.rel = "noopener noreferrer";
+    linkedin.append(icon("linkedin"), icon("external"));
 
     const details = el("div", "contact__details");
 
-    function addContactDetail(label, value, href, external) {
+    function addContactDetail(label, value, href, iconName) {
       const link = el("a", "contact-detail", "");
       link.href = href;
-      if (external) {
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-      }
       const labelEl = el("span", "contact-detail__label", label);
+      labelEl.prepend(icon(iconName));
       const valueEl = el("span", "contact-detail__value", value);
       link.append(labelEl, valueEl);
       details.appendChild(link);
     }
 
-    addContactDetail("Email", contact.email, `mailto:${contact.email}`);
-    addContactDetail("Phone", contact.phone, `tel:${contact.phone.replace(/[^\d+]/g, "")}`);
-    addContactDetail(
-      "LinkedIn",
-      contact.linkedin,
-      contact.linkedinUrl || `https://${contact.linkedin}`,
-      true
-    );
+    addContactDetail("Email", contact.email, `mailto:${contact.email}`, "mail");
+    addContactDetail("Phone", contact.phone, `tel:${contact.phone.replace(/[^\d+]/g, "")}`, "phone");
 
-    wrap.append(intro, email, details);
+    wrap.append(intro, email, linkedin, details);
   }
 
   function renderFooter(name) {
@@ -381,6 +458,7 @@
 
     const bg = document.getElementById("hero-bg");
     const hero = document.getElementById("hero");
+    const stage = document.querySelector(".hero__stage");
     if (!bg || !hero) return;
 
     let ticking = false;
@@ -390,7 +468,12 @@
       const scrollY = window.scrollY;
       if (scrollY < heroHeight) {
         bg.style.transform = `translateY(${scrollY * 0.18}px)`;
+        if (stage) stage.style.setProperty("--scroll-shift", `${scrollY * -0.08}px`);
       }
+      document.documentElement.style.setProperty(
+        "--scroll-progress",
+        `${Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight))}`
+      );
       ticking = false;
     }
 
@@ -404,6 +487,23 @@
       },
       { passive: true }
     );
+
+    hero.addEventListener("pointermove", (event) => {
+      const bounds = hero.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 12;
+      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -10;
+      if (stage) {
+        stage.style.setProperty("--pointer-x", `${x}deg`);
+        stage.style.setProperty("--pointer-y", `${y}deg`);
+      }
+    });
+    hero.addEventListener("pointerleave", () => {
+      if (stage) {
+        stage.style.removeProperty("--pointer-x");
+        stage.style.removeProperty("--pointer-y");
+      }
+    });
+    window.dispatchEvent(new Event("scroll"));
   }
 
   function setupTiltInteractions() {
@@ -442,6 +542,21 @@
       links.forEach((link) => link.classList.toggle("is-active", link === byId.get(visible.target.id)));
     }, { rootMargin: "-25% 0px -65%", threshold: [0.01, 0.2, 0.5] });
     sections.forEach((section) => observer.observe(section));
+  }
+
+  function setupScrollScenes() {
+    const scenes = document.querySelectorAll(".scroll-scene");
+    if (!scenes.length) return;
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      scenes.forEach((scene) => scene.classList.add("is-active"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle("is-active", entry.isIntersecting);
+      });
+    }, { threshold: 0.5 });
+    scenes.forEach((scene) => observer.observe(scene));
   }
 
   /* ----------------------------------------------------------
@@ -525,6 +640,7 @@
   function init() {
     loadAndRender();
     setupNavigation();
+    setupScrollScenes();
 
     const retryButton = document.getElementById("retry-load");
     if (retryButton) {

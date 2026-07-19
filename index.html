@@ -17,7 +17,7 @@
   <div class="noise-overlay" aria-hidden="true"></div>
 
   <nav class="nav" id="nav">
-    <a class="nav__mark" href="#hero" aria-label="Back to top">SA</a>
+    <a class="nav__mark" href="#hero" aria-label="Back to top">SA<span>/OPS</span></a>
     <div class="nav__links" aria-label="Primary navigation">
       <a href="#summary">About</a>
       <a href="#experience">Experience</a>
@@ -29,6 +29,7 @@
       <span class="status-dot" aria-hidden="true"></span>
       <span class="nav__status-text">Available for opportunities</span>
     </div>
+    <span class="nav__progress" aria-hidden="true"></span>
   </nav>
 
   <main id="main-content">
@@ -54,15 +55,29 @@
         <div class="hero-orbit hero-orbit--inner"></div>
         <div class="hero-node hero-node--one"></div>
         <div class="hero-node hero-node--two"></div>
-        <div class="hero-terminal">
-          <div class="hero-terminal__bar"><span></span><span></span><span></span></div>
-          <p><i>$</i> building systems</p>
-          <p><i>✓</i> scalable by design</p>
-          <p><i>✓</i> human at the center</p>
+        <div class="hero-terminal hero-terminal--code">
+          <div class="hero-terminal__bar"><span></span><span></span><span></span><b>architecture.ts</b></div>
+          <p><i>01</i> <em>const</em> platform = <strong>compose</strong>(</p>
+          <p><i>02</i> &nbsp;data, intelligence, delivery</p>
+          <p><i>03</i> );</p>
+          <p><i>04</i> <em>await</em> platform.<strong>ship</strong>();</p>
         </div>
+        <div class="hero-pipeline"><span>COMMIT</span><i></i><span>BUILD</span><i></i><span>DEPLOY</span></div>
+        <div class="hero-git"><span></span><b>main</b><i>●</i> passing</div>
+        <svg class="hero-neural" viewBox="0 0 260 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 26L110 55L190 26M28 26L110 110L190 26M28 124L110 55L190 124M28 124L110 110L190 124M110 55L238 75M110 110L238 75" />
+          <g><circle cx="28" cy="26" r="7"/><circle cx="28" cy="124" r="7"/><circle cx="110" cy="55" r="8"/><circle cx="110" cy="110" r="8"/><circle cx="190" cy="26" r="7"/><circle cx="190" cy="124" r="7"/><circle cx="238" cy="75" r="9"/></g>
+        </svg>
       </div>
       <div class="hero__bg" aria-hidden="true" id="hero-bg"></div>
     </section>
+
+    <div class="scroll-scene scroll-scene--code" data-scene="code" aria-hidden="true">
+      <div class="scroll-scene__inner">
+        <span class="scroll-scene__label">01 / COMPILING PROFILE</span>
+        <div class="scene-code"><i>const</i> engineer = <b>build</b>(<span>systems</span>);<br><i>await</i> engineer.<b>ship</b>();</div>
+      </div>
+    </div>
 
     <section id="summary" class="summary" aria-label="Summary">
       <p class="eyebrow">// SUMMARY</p>
@@ -70,11 +85,25 @@
       <div class="stats" id="stats-grid"></div>
     </section>
 
+    <div class="scroll-scene scroll-scene--neural" data-scene="neural" aria-hidden="true">
+      <div class="scroll-scene__inner">
+        <span class="scroll-scene__label">02 / PROCESSING SIGNALS</span>
+        <svg class="scene-neural" viewBox="0 0 420 120" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28 20L145 60L264 20M28 20L145 96L264 20M28 100L145 60L264 100M28 100L145 96L264 100M145 60L390 60M145 96L390 60"/><g><circle cx="28" cy="20" r="8"/><circle cx="28" cy="100" r="8"/><circle cx="145" cy="60" r="10"/><circle cx="145" cy="96" r="10"/><circle cx="264" cy="20" r="8"/><circle cx="264" cy="100" r="8"/><circle cx="390" cy="60" r="12"/></g></svg>
+      </div>
+    </div>
+
     <section id="experience" class="experience" aria-label="Experience">
       <p class="eyebrow">// EXPERIENCE</p>
       <h2 class="section-heading">Where I've built things</h2>
       <div class="timeline" id="timeline"></div>
     </section>
+
+    <div class="scroll-scene scroll-scene--git" data-scene="git" aria-hidden="true">
+      <div class="scroll-scene__inner">
+        <span class="scroll-scene__label">03 / MERGING DELIVERY HISTORY</span>
+        <div class="scene-git"><b>main</b><i></i><i></i><i></i><span>feature / impact</span><i></i><i></i><strong>merged</strong></div>
+      </div>
+    </div>
 
     <section id="skills" class="skills" aria-label="Skills">
       <p class="eyebrow">// SKILLS</p>
@@ -83,11 +112,25 @@
       <div class="skills__grid" id="skills-grid"></div>
     </section>
 
+    <div class="scroll-scene scroll-scene--pipeline" data-scene="pipeline" aria-hidden="true">
+      <div class="scroll-scene__inner">
+        <span class="scroll-scene__label">04 / VALIDATING TOOLCHAIN</span>
+        <div class="scene-pipeline"><span>TEST</span><i></i><span>BUILD</span><i></i><span>SECURE</span><i></i><span>RELEASE</span></div>
+      </div>
+    </div>
+
     <section id="projects" class="projects" aria-label="Projects">
       <p class="eyebrow">// PROJECTS</p>
       <h2 class="section-heading">Selected work</h2>
       <div class="projects__grid" id="projects-grid"></div>
     </section>
+
+    <div class="scroll-scene scroll-scene--deploy" data-scene="deploy" aria-hidden="true">
+      <div class="scroll-scene__inner">
+        <span class="scroll-scene__label">05 / DEPLOYING SYSTEMS</span>
+        <div class="scene-deploy"><span>CLIENT</span><i></i><span>API</span><i></i><span>DATA</span><i></i><span>INTELLIGENCE</span></div>
+      </div>
+    </div>
 
     <section id="education" class="education" aria-label="Education and patents">
       <div class="education__col">

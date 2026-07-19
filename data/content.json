@@ -30,7 +30,8 @@
         "Architected and led end-to-end delivery of an LLM-based summarization service for a 20-person team, cutting response time on 1,000\u20132,000 daily citizen comments from 1 day to 4 hours (75% reduction), with built-in auto-redaction for AI safety compliance.",
         "Designed and standardized scalable distributed data-processing architecture using Databricks, Apache Spark, Airflow, and MLflow, establishing production engineering patterns adopted across multiple engineering teams.",
         "Designed and shipped two executive-facing R Shiny/Plotly dashboards independently, replacing a multi-day cross-team manual process and analyzing survey data across 100,000+ respondents \u2014 both adopted at the executive level."
-      ]
+      ],
+      "impact": "Accelerated production AI inference by 12× (3,600ms to 300ms) while supporting 100,000+ daily requests by compressing and deploying a 15GB model as containerized REST APIs."
     },
     {
       "company": "Statistics Canada",
@@ -43,7 +44,8 @@
         "Designed and implemented a distributed data ingestion platform integrating 12+ data sources, reducing refresh latency from 24 hours to 5 minutes while processing over 1 million production records daily.",
         "Led a team of 5 engineers and served as primary client contact coordinating 2 additional teams \u2014 owning requirements gathering, KPI definition, and on-time delivery end-to-end.",
         "Diagnosed root-cause issues and redesigned the search architecture (algorithm + NLP pipeline), lifting accuracy from 35% to 65%, cutting complaints 20%, and growing traffic 10%."
-      ]
+      ],
+      "impact": "Reduced data-refresh latency from 24 hours to 5 minutes while processing 1M+ daily records by building a distributed ingestion platform that unified 12+ data sources."
     },
     {
       "company": "University of Ottawa",
@@ -54,7 +56,8 @@
       "bullets": [
         "Redesigned the university library's client-server booking system (PHP/MySQL) to support 50\u201360 daily users and up to 30 requests per 3-hour window, adapting the system under tight deadlines for pandemic-driven demand.",
         "Delivered booking and resource-access features end-to-end within an Agile team, from requirements through deployment."
-      ]
+      ],
+      "impact": "Enabled reliable access for 50–60 daily users and up to 30 booking requests per three-hour window by redesigning the university library's PHP/MySQL booking system under pandemic-driven demand."
     },
     {
       "company": "Cognizant",
@@ -65,7 +68,8 @@
       "bullets": [
         "Built and maintained distributed Java Spring microservices supporting a legacy-to-modern client-server migration for a banking platform serving 5M+ users.",
         "Developed Angular front-end interfaces and integrated CI/CD into the team's workflow, partnering with the Scrum Master to deliver user stories on sprint timelines."
-      ]
+      ],
+      "impact": "Supported a legacy-to-modern banking migration serving 5M+ users by building Java/Spring microservices and integrating Angular interfaces with the team's CI/CD delivery workflow."
     }
   ],
   "skills": {
