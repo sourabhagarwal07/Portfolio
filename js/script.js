@@ -76,6 +76,24 @@
     return genericToolIcon();
   }
 
+  function projectTechIcon(name) {
+    const brands = {
+      CSS: "css", Config: "github", GitHub: "github", JavaScript: "javascript",
+      HTML: "html5", Joomla: "joomla", Java: "openjdk", Servlets: "apachetomcat",
+      JSP: "oracle", "Web App": "googlechrome", Python: "python", AI: "openai",
+      "Machine Learning": "scikitlearn", Unity: "unity", "Game Development": "unity",
+      Analytics: "googleanalytics"
+    };
+    const image = el("img", "project-card__tech-logo");
+    image.src = `https://cdn.simpleicons.org/${brands[name] || "code"}/a5f3fc`;
+    image.alt = "";
+    image.width = 16;
+    image.height = 16;
+    image.loading = "lazy";
+    image.addEventListener("error", () => image.remove());
+    return image;
+  }
+
   function genericToolIcon() {
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -231,19 +249,11 @@
       if (project.tags && project.tags.length) {
         const tagWrap = el("div", "project-card__tags");
         project.tags.forEach((tag) => {
-          tagWrap.appendChild(el("span", "project-card__tag", tag));
+          const chip = el("span", "project-card__tag");
+          chip.append(projectTechIcon(tag), document.createTextNode(tag));
+          tagWrap.appendChild(chip);
         });
         card.appendChild(tagWrap);
-      }
-
-      if (project.updatedAt) {
-        const meta = el("div", "project-card__meta");
-        const date = new Date(project.updatedAt).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "short",
-        });
-        meta.textContent = `Last updated ${date}`;
-        card.appendChild(meta);
       }
 
       if (project.link) {
@@ -451,25 +461,14 @@
   }
 
   /* ----------------------------------------------------------
-   * Subtle parallax on the hero background, throttled via rAF
+   * Keep the navigation progress indicator in sync with page scroll.
    * ---------------------------------------------------------- */
-  function setupParallax() {
-    if (prefersReducedMotion) return;
-
-    const bg = document.getElementById("hero-bg");
-    const hero = document.getElementById("hero");
-    const stage = document.querySelector(".hero__stage");
-    if (!bg || !hero) return;
+  function setupScrollProgress() {
 
     let ticking = false;
 
     function update() {
-      const heroHeight = hero.offsetHeight;
       const scrollY = window.scrollY;
-      if (scrollY < heroHeight) {
-        bg.style.transform = `translateY(${scrollY * 0.18}px)`;
-        if (stage) stage.style.setProperty("--scroll-shift", `${scrollY * -0.08}px`);
-      }
       document.documentElement.style.setProperty(
         "--scroll-progress",
         `${Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - window.innerHeight))}`
@@ -488,21 +487,6 @@
       { passive: true }
     );
 
-    hero.addEventListener("pointermove", (event) => {
-      const bounds = hero.getBoundingClientRect();
-      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 12;
-      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -10;
-      if (stage) {
-        stage.style.setProperty("--pointer-x", `${x}deg`);
-        stage.style.setProperty("--pointer-y", `${y}deg`);
-      }
-    });
-    hero.addEventListener("pointerleave", () => {
-      if (stage) {
-        stage.style.removeProperty("--pointer-x");
-        stage.style.removeProperty("--pointer-y");
-      }
-    });
     window.dispatchEvent(new Event("scroll"));
   }
 
@@ -628,7 +612,7 @@
 
       setupRevealObserver();
       setupStatCounters();
-      setupParallax();
+      setupScrollProgress();
       setupTiltInteractions();
       hideLoadError();
     } catch (err) {

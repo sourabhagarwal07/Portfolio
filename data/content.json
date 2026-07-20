@@ -1,16 +1,16 @@
 {
   "hero": {
     "name": "Sourabh Agarwal",
-    "title": "Technical Leader & Software Engineer",
+    "title": "Data Scientist/Software Engineer/FullStack Developer",
     "taglines": [
       "Technical Leader.",
       "Distributed Systems Architect.",
       "AI Infrastructure Engineer.",
-      "8+ years shipping production-scale systems."
+      "7+ years shipping production-scale systems."
     ]
   },
   "summary": {
-    "text": "Technical leader and software engineer with 8+ years architecting and delivering distributed backend systems, real-time data platforms, and client-server applications across government and enterprise environments. Background includes distributed Java/Spring microservices for a legacy-to-modern banking platform migration serving 5M+ users. Leads cross-functional engineering teams, with a track record of driving automation and AI-agent tooling (LangChain, CrewAI, RAG) to increase engineering efficiency. Patent holder in predictive analytics, with an M.Sc. in Digital Transformation and Innovation and a B.Tech in Software Engineering.",
+    "text": "Data Scientist and software engineer with 7+ years architecting and delivering distributed backend systems, real-time data platforms, and client-server applications across government and enterprise environments. Background includes distributed Java/Spring microservices for a legacy-to-modern banking platform migration serving 5M+ users. Leads cross-functional engineering teams, with a track record of driving automation and AI-agent tooling (LangChain, CrewAI, RAG) to increase engineering efficiency. Patent holder in predictive analytics, with an M.Sc. in Digital Transformation and Innovation and a B.Tech in Software Engineering.",
     "stats": [
       { "value": 12, "suffix": "×", "label": "inference latency reduction (3,600ms \u2192 300ms)" },
       { "value": 100, "suffix": "K+", "label": "requests served per day" },
@@ -93,66 +93,57 @@
   "projects": [
     {
       "title": "Resume",
-      "description": "A modern resume site showcasing full-stack development and software engineering skills.",
+      "description": "A responsive personal-resume experience that presents software engineering capabilities, project work, and professional background through a clear, accessible interface.",
       "link": "https://github.com/sourabhagarwal07/Resume",
-      "tags": ["CSS"],
-      "updatedAt": "2022-10-27T00:57:51Z"
+      "tags": ["CSS"]
     },
     {
       "title": "GitHub Profile Configuration",
-      "description": "Configuration files and content for a customized GitHub profile.",
+      "description": "A curated GitHub profile configuration that communicates technical focus, selected work, and professional identity consistently across the developer ecosystem.",
       "link": "https://github.com/sourabhagarwal07/sourabhagarwal07",
-      "tags": ["Config", "GitHub"],
-      "updatedAt": "2022-05-16T22:29:43Z"
+      "tags": ["Config", "GitHub"]
     },
     {
       "title": "GitHub Repository Demo",
-      "description": "A JavaScript-based repository created to explore and demonstrate GitHub workflows.",
+      "description": "A practical JavaScript demonstration project used to explore source-control workflows, repository organization, and collaborative development conventions.",
       "link": "https://github.com/sourabhagarwal07/sourabhagarwal_github",
-      "tags": ["JavaScript"],
-      "updatedAt": "2021-04-23T16:51:14Z"
+      "tags": ["JavaScript"]
     },
     {
       "title": "Throucery",
-      "description": "A mock e-commerce experience built and hosted with Joomla.",
+      "description": "A Joomla-based e-commerce prototype that models a streamlined online shopping journey, from product discovery through customer-facing content delivery.",
       "link": "https://github.com/sourabhagarwal07/Throucery",
-      "tags": ["HTML", "Joomla"],
-      "updatedAt": "2020-09-21T22:22:35Z"
+      "tags": ["HTML", "Joomla"]
     },
     {
       "title": "Dynamic Web Project",
-      "description": "A dynamic web application built with Java Servlets, JSP, and related web technologies.",
+      "description": "A server-rendered Java web application demonstrating structured request handling, dynamic views, and maintainable backend-to-frontend integration using Servlets and JSP.",
       "link": "https://github.com/sourabhagarwal07/Web_Project",
-      "tags": ["Java", "Servlets", "JSP"],
-      "updatedAt": "2020-01-22T06:31:51Z"
+      "tags": ["Java", "Servlets", "JSP"]
     },
     {
       "title": "IT Asset Management Tool",
-      "description": "An internship project: a dynamic web application for managing organizational assets assigned to employees.",
+      "description": "An internal asset-management application that supports organized tracking of equipment assignments, improving visibility and accountability for employee-issued resources.",
       "link": "https://github.com/sourabhagarwal07/IT_Asset-_management_tool",
-      "tags": ["JavaScript", "Web App"],
-      "updatedAt": "2020-01-22T06:13:04Z"
+      "tags": ["JavaScript", "Web App"]
     },
     {
       "title": "Candev Demo",
-      "description": "A smart police-recruitment concept that applies AI and machine learning to analyze and automate existing processes.",
+      "description": "An AI-enabled recruitment concept that applies machine-learning analysis to support more consistent candidate assessment and automate high-volume administrative workflows.",
       "link": "https://github.com/sourabhagarwal07/Candev_demo",
-      "tags": ["Python", "AI", "Machine Learning"],
-      "updatedAt": "2020-01-19T16:51:14Z"
+      "tags": ["Python", "AI", "Machine Learning"]
     },
     {
       "title": "FPS Game Development",
-      "description": "An exploration of the Unity environment through a first-person shooter game prototype.",
+      "description": "A Unity-based first-person game prototype created to develop hands-on experience with interactive gameplay systems, scene composition, and real-time application development.",
       "link": "https://github.com/sourabhagarwal07/FPS-Game-Development",
-      "tags": ["Unity", "Game Development"],
-      "updatedAt": "2020-01-16T22:22:35Z"
+      "tags": ["Unity", "Game Development"]
     },
     {
       "title": "Restaurant Customer Prediction",
-      "description": "A major project applying machine learning to help restaurants predict customer churn and improve retention.",
+      "description": "A machine-learning analytics project designed to identify restaurant customer churn risk, enabling data-informed retention strategies and more proactive service decisions.",
       "link": "https://github.com/sourabhagarwal07/Customer-Prediction-for-Restaurant-Domain-Major-Project-",
-      "tags": ["Java", "Machine Learning", "Analytics"],
-      "updatedAt": "2020-01-16T22:12:56Z"
+      "tags": ["Java", "Machine Learning", "Analytics"]
     }
   ],
   "education": [
