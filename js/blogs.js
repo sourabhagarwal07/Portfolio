@@ -27,6 +27,7 @@
     target.innerHTML = `<header class="article__header"><p class="eyebrow">// ${post.tags.map(escape).join(" · ")}</p><p class="article__meta">${date(post.date)} · ${escape(post.readTime)}</p></header>${markdown(await response.text())}`;
   }
   async function init() {
+    const favicon = document.createElement("link"); favicon.rel = "icon"; favicon.type = "image/svg+xml"; favicon.href = "assets/favicon-coding-avatar.svg"; document.head.appendChild(favicon);
     const year = $("year"); if (year) year.textContent = new Date().getFullYear();
     try { const response = await fetch("data/blogs/index.json"); if (!response.ok) throw new Error("Index unavailable"); const posts = await response.json(); renderList(posts); await renderArticle(posts); }
     catch (error) { const target = $("blog-list") || $("article"); if (target) target.innerHTML = "<p class='blog-error'>Writing could not be loaded. Please try again shortly.</p>"; console.error(error); }

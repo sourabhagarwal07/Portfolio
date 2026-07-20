@@ -913,7 +913,6 @@ main > section:not(.hero)::before { content: "</>"; position: absolute; top: 3.5
 .skill-tile { background: hsl(var(--hue) 55% 32% / .2); }
 .projects__grid { gap: 1rem; }
 .project-card { min-height: 292px; background: linear-gradient(145deg, rgba(15,28,43,.9), rgba(7,11,20,.84)); }
-.project-card::after { content: "git status"; position: absolute; right: 1.25rem; bottom: 1.2rem; color: rgba(74,222,128,.35); font: .58rem var(--font-mono); }
 .project-card__link { z-index: 1; }
 .project-card__tag { border: 1px solid rgba(34,211,238,.16); background: rgba(34,211,238,.08); color: #a5f3fc; }
 .project-card__tag { display: inline-flex; align-items: center; gap: .32rem; }
